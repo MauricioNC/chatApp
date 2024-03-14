@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "new_chat_room" do %>
-  <%= form_with(model: @room) do |f| %>
+  <%= form_with(model: @room, data: { turbo: "_top" }) do |f| %>
     <%= f.label :email, "Email" %>
     <%= f.text_field :email, placeholder: "email@example.com" %>
     <%= f.submit %>
