@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_13_033848) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_13_221423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_033848) do
     t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "body", null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -30,12 +31,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_033848) do
   end
 
   create_table "user_rooms", force: :cascade do |t|
-    t.bigint "users_id", null: false
-    t.bigint "rooms_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rooms_id"], name: "index_user_rooms_on_rooms_id"
-    t.index ["users_id"], name: "index_user_rooms_on_users_id"
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -47,6 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_033848) do
 
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
-  add_foreign_key "user_rooms", "rooms", column: "rooms_id"
-  add_foreign_key "user_rooms", "users", column: "users_id"
+  add_foreign_key "user_rooms", "rooms"
+  add_foreign_key "user_rooms", "users"
 end

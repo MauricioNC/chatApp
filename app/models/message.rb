@@ -1,4 +1,4 @@
 class Message < ApplicationRecord
-  belongs_to :from_user_id
-  belongs_to :to_user_id
+  belongs_to :receiver, class_name: 'User'
+  belongs_to :sender, class_name: 'User'
 end
