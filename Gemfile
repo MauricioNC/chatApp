@@ -70,3 +70,7 @@ group :test do
 end
 
 gem 'dotenv', groups: [:development, :test]
+
+gem "jwt", "~> 2.8"
+
+gem "sidekiq", "~> 7.2"
