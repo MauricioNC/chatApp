@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_15_025438) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_15_164418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,14 +28,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_025438) do
     t.string "room"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "token_id", null: false
-    t.index ["token_id"], name: "index_rooms_on_token_id"
   end
 
   create_table "tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tokenable_type", null: false
+    t.bigint "tokenable_id", null: false
+    t.index ["tokenable_type", "tokenable_id"], name: "index_tokens_on_tokenable"
   end
 
   create_table "user_rooms", force: :cascade do |t|
@@ -52,14 +53,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_025438) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "token_id", null: false
-    t.index ["token_id"], name: "index_users_on_token_id"
   end
 
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
-  add_foreign_key "rooms", "tokens"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
-  add_foreign_key "users", "tokens"
 end

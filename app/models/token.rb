@@ -1,4 +1,3 @@
 class Token < ApplicationRecord
-  belongs_to :users
-  belongs_to :rooms
+  belongs_to :tokenable, polymorphic: true
 end
