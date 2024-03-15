@@ -1,6 +1,6 @@
 require 'jwt'
 
-class AuthorizeService
+class TokenizeService
   SECRET_KEY = Rails.application.secrets.secret_key_base. to_s
 
   def initialize(payload = nil, token = nil)
