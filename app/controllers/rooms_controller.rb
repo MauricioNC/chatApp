@@ -8,7 +8,7 @@ class RoomsController < ApplicationController
     if @user.nil?
       render :new
     else
-      UserMailer.with(user: @user).email_confirmation.deliver_later
+      EmailConfirmationJob.perform_async(@user.id)
       respond_to do |format|
         format.html {}
         format.turbo_stream
