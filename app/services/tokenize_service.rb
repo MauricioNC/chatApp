@@ -9,11 +9,11 @@ class TokenizeService
   end
 
   def generate_token
-    JWT.encode @payload, nil, 'none'
+    JWT.encode @payload, SECRET_KEY, 'HS256'
   end
 
   def decode_token
-    JWT.decode @token, nil, false
+    JWT.decode @token, SECRET_KEY, true, { algorithm: 'HS256' }
   rescue JWT::EncodeError
     redirect_to root_path, notice: 'Invalid token', status: :unauthorized
   end
