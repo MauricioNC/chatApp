@@ -1,2 +1,5 @@
 <h1>Hola <%= @user.username %></h1>
-<p>Este es tu token: <%= @token %></p>
+<div>
+  <p>Usa el siguiente enlace para crear tu chatroom: </p>
+  <%= link_to "Crear chat room", auth_url(token: @token, room: @room) %>
+</div>

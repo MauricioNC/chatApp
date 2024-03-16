@@ -1,6 +1,7 @@
 class UserMailer < ApplicationMailer
   def email_confirmation
     @user = params[:user]
+    @room = params[:room]
     @token = TokenizeService.new(
       payload: { email: @user.email, username: @user.username }
     ).generate_token
