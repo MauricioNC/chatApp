@@ -1,7 +1,13 @@
 <%= turbo_frame_tag "new_chat_room" do %>
-  <%= form_with(model: @room, data: { turbo: "_top" }) do |f| %>
-    <%= f.label :email, "Email" %>
-    <%= f.text_field :email, placeholder: "email@example.com" %>
+  <%= form_with(model: @room, data: { turbo: "false" }) do |f| %>
+    <div>
+      <%= f.label :username, "Username" %>
+      <%= f.text_field :username, placeholder: "John Doe" %>
+    </div>
+    <div>
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email, placeholder: "email@example.com" %>
+    </div>
     <%= f.submit %>
   <% end %>
 <% end %>
