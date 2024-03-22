@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_17_021737) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_22_174252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,7 +27,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_021737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "body", null: false
+    t.bigint "room_id", null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_021737) do
   end
 
   add_foreign_key "invitations", "users"
+  add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "user_rooms", "rooms"
