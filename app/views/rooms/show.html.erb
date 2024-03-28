@@ -1,1 +1,17 @@
-<%= @room %>
+<div id="<%= @room.room %>" class="container border-2 w-full h-full flex flex-col justify-end items-center" data-room="<%= @room.room %>">
+  <div id="conversation" class="bg-[crimson] w-full">
+    <% @conversation.each do |message| %>
+      <% if message.sender_id == current_user.id %>
+        <p><%= message.body %></p>
+      <% else %>
+        <p><%= message.body %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="w-full relative">
+    <%= form_with(model: [@room, @message], class: "w-full flex justify-center items-center gap-3") do |f| %>
+      <%= f.text_area :body, placeholder: "Message", class: "w-full border-slate-400" %>
+      <%= f.submit "Send", class: "bg-green-400 px-5 py-2 rounded-full w-[50px] h-[50px]" %>
+    <% end %>
+  </div>
+</div>

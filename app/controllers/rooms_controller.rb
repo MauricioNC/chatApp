@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   def show
     @room = Room.find_by_room(params[:room])
+    @message = Message.new
+    @conversation = current_user.sender_messages.where(room_id: @room.id)
   end
 
   def new
